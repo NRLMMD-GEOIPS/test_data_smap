@@ -1,20 +1,24 @@
     # # # Distribution Statement A. Approved for public release. Distribution unlimited.
-    # # # 
+    # # #
     # # # Author:
     # # # Naval Research Laboratory, Marine Meteorology Division
-    # # # 
-    # # # This program is free software:
-    # # # you can redistribute it and/or modify it under the terms
-    # # # of the NRLMMD License included with this program.
-    # # # 
-    # # # If you did not receive the license, see
+    # # #
+    # # # This program is free software: you can redistribute it and/or modify it under
+    # # # the terms of the NRLMMD License included with this program. This program is
+    # # # distributed WITHOUT ANY WARRANTY; without even the implied warranty of
+    # # # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the included license
+    # # # for more details. If you did not receive the license, for more information see:
     # # # https://github.com/U-S-NRL-Marine-Meteorology-Division/
-    # # # for more information.
-    # # # 
-    # # # This program is distributed WITHOUT ANY WARRANTY;
-    # # # without even the implied warranty of MERCHANTABILITY
-    # # # or FITNESS FOR A PARTICULAR PURPOSE.
-    # # # See the included license for more details.
+
+
+# v1.6.0: 2022-12-01, open source release updates
+## GEOIPS#119: 2022-12-01, update README, uncompress script
+### Documentation
+#### README.md
+* Remove explicit installation steps, link to geoips
+### Test Repo Updates
+* Standardize uncompress_test_data.sh
+* Remove recompress_test_data.sh (no longer used)
 
 
 # v1.5.1: 2022-07-14, geoips2->geoips, consolidate test outputs, update compress scripts
@@ -48,7 +52,7 @@
     * Update .gitignore to ignore *diff_test_output_dir* rather than *diff_test*     
 
 
-# v1.3.0: 2021-11-25, atcf->tc, remove satops
+# v1.3.0: 2021-11-25, atcf->tc, update path
 
 ### Breaking Test Repo Updates
     * Update TC YAML metadata outputs
