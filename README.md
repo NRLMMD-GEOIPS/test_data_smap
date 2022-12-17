@@ -62,6 +62,8 @@ Run sample test scripts
     # using $GEOIPS_TESTDATA_DIR, $GEOIPS_PACKAGES_DIR, and $GEOIPS_CONFIG_FILE:
     source $GEOIPS_CONFIG_FILE
 
+    # SMAP text output is compressed in main geoips repo - decompress
+    $GEOIPS_PACKAGES_DIR/geoips/tests/uncompress_test_data.sh
     # GeoIPS-based test scripts should successfully return 0 if everything is set up properly.
     $GEOIPS_PACKAGES_DIR/geoips/tests/scripts/smap.unsectored.text_winds.sh
 ```
