@@ -1,80 +1,65 @@
     # # # Distribution Statement A. Approved for public release. Distribution unlimited.
-    # # # 
+    # # #
     # # # Author:
     # # # Naval Research Laboratory, Marine Meteorology Division
-    # # # 
-    # # # This program is free software:
-    # # # you can redistribute it and/or modify it under the terms
-    # # # of the NRLMMD License included with this program.
-    # # # 
-    # # # If you did not receive the license, see
+    # # #
+    # # # This program is free software: you can redistribute it and/or modify it under
+    # # # the terms of the NRLMMD License included with this program. This program is
+    # # # distributed WITHOUT ANY WARRANTY; without even the implied warranty of
+    # # # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the included license
+    # # # for more details. If you did not receive the license, for more information see:
     # # # https://github.com/U-S-NRL-Marine-Meteorology-Division/
-    # # # for more information.
-    # # # 
-    # # # This program is distributed WITHOUT ANY WARRANTY;
-    # # # without even the implied warranty of MERCHANTABILITY
-    # # # or FITNESS FOR A PARTICULAR PURPOSE.
-    # # # See the included license for more details.
 
-Testing Guide
-=============
 
-This testing guide has steps specific to installing and testing geoips for purposes of testing datasets
-contained within this test data repository.  This includes installing the base geoips conda environment
-if not already installed.
+SMAP Ocean Winds Test Datasets
+===============================
 
-Setup System Environment Variables
-----------------------------------
+This repository contains test datasets for use with the Geolocated Information Processing System.
 
-```bash
+Please see the 
+[GeoIPS Documentation](https://github.com/NRLMMD-GEOIPS/geoips/blob/main/README.md)
+for more information on the GeoIPS plugin architecture and base infrastructure.
 
-    # GEOIPS_BASEDIR will contain all source, output, and external dependencies
-    # Ensure this is consistently set for all installation / setup steps below
-    export GEOIPS_BASEDIR=$HOME/geoproc
+Sample Dataset Sources
+-----------------------
 
-    # GEOIPS_REPO_URL should point to the base URL for git clone commands
-    export GEOIPS_REPO_URL=https://github.com/NRLMMD-GeoIPS
+* Derived windspeed data from Joint Propulsion Lab's Soil Moisture Active Passive (SMAP) mission
+    * https://smap.jpl.nasa.gov/
+* SMAP ocean winds are produced by Remote Sensing Systems and sponsored by NASA. Data are available at www.remss.com
 
-    # This config file must be sourced ANY TIME you want to run geoips
-    export GEOIPS_CONFIG_FILE=$GEOIPS_BASEDIR/geoips_packages/geoips/setup/config_geoips
 
-```
+System Requirements
+---------------------
 
-Obtain geoips source repo and test data repo
----------------------------------------------
-```bash
-    mkdir -p $GEOIPS_BASEDIR/geoips_packages/
+* geoips >= 1.5.4
+* Test data repos contained in $GEOIPS_TESTDATA_DIR for tests to pass.
 
-    git clone $GEOIPS_REPO_URL/geoips.git $GEOIPS_BASEDIR/geoips_packages/geoips
-    
-    git -C $GEOIPS_BASEDIR/geoips_packages/geoips pull
-    git -C $GEOIPS_BASEDIR/geoips_packages/geoips checkout -t origin/dev
-    git -C $GEOIPS_BASEDIR/geoips_packages/geoips checkout dev
-    git -C $GEOIPS_BASEDIR/geoips_packages/geoips pull
 
-    git clone ${GEOIPS_REPO_URL}/test_data_smap.git ${GEOIPS_BASEDIR}/test_data/test_data_smap
-    git -C ${GEOIPS_BASEDIR}/test_data/test_data_smap pull
-    git -C ${GEOIPS_BASEDIR}/test_data/test_data_smap checkout -t origin/dev
-    git -C ${GEOIPS_BASEDIR}/test_data/test_data_smap checkout dev
-    git -C ${GEOIPS_BASEDIR}/test_data/test_data_smap pull
-```
-
-IF REQUIRED: Install and test base geoips conda environment
+IF REQUIRED: Install base geoips package
 ------------------------------------------------------------
+SKIP IF YOU HAVE ALREADY INSTALLED BASE GEOIPS ENVIRONMENT 
+
+If GeoIPS Base is not yet installed, follow the
+[installation instructions](https://github.com/NRLMMD-GEOIPS/geoips/blob/main/docs/installation.rst)
+within the geoips source repo documentation.
+
+Obtain test repo
+----------------
 ```bash
-    # SKIP IF YOU HAVE ALREADY INSTALLED BASE GEOIPS CONDA ENVIRONMENT 
-    # This prompts you through all the steps of installing the geoips conda environment from scratch,
-    # using the parameters specified above.  This only needs to be done once per system, skip if you
-    # already ran this step.
-    $GEOIPS_BASEDIR/geoips_packages/geoips/base_install_and_test.sh dev
+    # Assuming you followed the fully supported installation,
+    # using $GEOIPS_TESTDATA_DIR and $GEOIPS_CONFIG_FILE:
+    source $GEOIPS_CONFIG_FILE
+    git clone $GEOIPS_REPO_URL/test_data_smap $GEOIPS_TESTDATA_DIR/test_data_smap
 ```
 
 Run sample test scripts
 -----------------------
 ```bash
-    # Setup geoips environment variables
+
+    # Assuming you followed the fully supported installation,
+    # using $GEOIPS_TESTDATA_DIR, $GEOIPS_PACKAGES_DIR, and $GEOIPS_CONFIG_FILE:
     source $GEOIPS_CONFIG_FILE
 
-    # Runs a single direct SMAP command line call
-    $GEOIPS/tests/scripts/smap.unsectored.text_winds.sh
+    # GeoIPS-based test scripts should successfully return 0 if everything is set up properly.
+    $GEOIPS_PACKAGES_DIR/geoips/tests/scripts/smap.unsectored.text_winds.sh
 ```
